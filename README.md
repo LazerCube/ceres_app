@@ -1,5 +1,5 @@
 Ceres app - Built with Typescript and Gulp
-=================================
+==========================================
 
 App part of the Ceres project using Angular 2 with Gulp as a build system.
 
@@ -12,6 +12,12 @@ Prerequisites
 - typescrit
 - ts-node
 
+Recommendation
+--------------
+
+*   [NVM](https://github.com/creationix/nvm) - Use Node Version Manager to manage node.js and npm.
+
+
 Running
 -------
 
@@ -19,7 +25,7 @@ Clone the repository:
 
 > git clone
 
-Navigate to `angular2-typescript-gulp` directory:
+Navigate to `ceres_app` directory:
 
 > cd ceres_app
 
