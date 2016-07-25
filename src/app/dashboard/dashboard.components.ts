@@ -9,20 +9,22 @@ import { UserService } from '../user.service';
     selector: 'my-dashboard',
     templateUrl: 'app/dashboard/dashboard.component.html',
     styleUrls: ['app/dashboard/dashboard.component.css'],
-    providers: [
-        UserService
-    ]
+    providers: [UserService]
 })
 
 export class DashboardComponent implements OnInit {
     user: User[];
+    error: any;
 
     constructor(
-        public router: Router,
-        private userService: UserService) { }
+        public _router: Router,
+        private _userService: UserService) { }
 
     getInformation() {
-        this.userService.getMe();
+        this._userService
+            .getSelf()
+            .then(user => this.user = user)
+            .catch(error => this.error = error);
     }
 
     ngOnInit() {
@@ -31,6 +33,6 @@ export class DashboardComponent implements OnInit {
 
     logout() {
       localStorage.removeItem('token');
-      this.router.parent.navigateByUrl('/login');
+      this._router.parent.navigateByUrl('/login');
     }
 }
