@@ -3,6 +3,8 @@ import { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from '@angular/route
 
 import {LoggedInRouterOutlet} from './LoggedInOutlet';
 import { DashboardComponent } from './dashboard/dashboard.components';
+
+import { UserService } from './user.service';
 import { Login } from './login/login';
 
 @Component({
@@ -11,6 +13,7 @@ import { Login } from './login/login';
     directives: [LoggedInRouterOutlet],
     providers: [
         ROUTER_PROVIDERS,
+        UserService
     ]
 })
 @RouteConfig([

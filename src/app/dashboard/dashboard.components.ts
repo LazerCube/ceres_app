@@ -9,7 +9,6 @@ import { UserService } from '../user.service';
     selector: 'my-dashboard',
     templateUrl: 'app/dashboard/dashboard.component.html',
     styleUrls: ['app/dashboard/dashboard.component.css'],
-    providers: [UserService]
 })
 
 export class DashboardComponent implements OnInit {
@@ -17,14 +16,13 @@ export class DashboardComponent implements OnInit {
     error: any;
 
     constructor(
-        public _router: Router,
-        private _userService: UserService) { }
+        private router: Router,
+        private userService: UserService ) { }
 
     getInformation() {
-        this._userService
+        this.userService
             .getSelf()
-            .then(user => this.user = user)
-            .catch(error => this.error = error);
+            .subscribe(user => this.user = user);
     }
 
     ngOnInit() {
@@ -33,6 +31,6 @@ export class DashboardComponent implements OnInit {
 
     logout() {
       localStorage.removeItem('token');
-      this._router.parent.navigateByUrl('/login');
+      this.router.parent.navigateByUrl('/login');
     }
 }

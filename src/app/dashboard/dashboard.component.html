@@ -1,1 +1,5 @@
-<h2>Hello, {{ user }}</h2>
+<div *ngIf="user">
+    <h2>Hello, {{ user.username }}</h2>
+</div>
+
+<button (click)="logout()">Logout</button>

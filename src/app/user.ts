@@ -1,7 +1,9 @@
 export class User {
-  id: number;
-  url: string;
-  username: string;
-  firstName: string;
-  lastName: string;
+    url: string;
+    id: number;
+    username: string;
+    created_at: string;
+    updated_at: string;
+    firstName: string;
+    lastName: string;
 }
