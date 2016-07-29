@@ -16,7 +16,7 @@ export class Login {
   login(event, username, password) {
     event.preventDefault();
 
-    var clientID = 'hQCWY2zi3dhMq0T3UjW4IOfgo6aizfTIsmntOg9r';
+    var clientID = 'awesIPrHdeWqvZx4Xb7IKX2JtcuZ2Q4MdISasbCE';
     var data =  "grant_type=password&username="
              +  "&username=" + username
              +  "&password=" + password
@@ -25,7 +25,7 @@ export class Login {
      var headers = new Headers();
      headers.append('Content-Type', 'application/x-www-form-urlencoded');
 
-    this.http.post('http://192.168.2.48:8001/o/token/', data, {
+    this.http.post('http://192.168.2.48:8000/token/', data, {
         headers: headers
     })
     .subscribe(

@@ -2,14 +2,14 @@ import { Injectable } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
 
 import 'rxjs/Rx';
-import { Observable }       from 'rxjs/Observable';
+import { Observable } from 'rxjs/Observable';
 
 import { User } from './user';
 
 @Injectable()
 export class UserService {
 
-    private userUrl = 'http://192.168.2.48:8001/me/';
+    private userUrl = 'http://192.168.2.48:8000/me/';
 
     constructor(private http: Http) { }
 
