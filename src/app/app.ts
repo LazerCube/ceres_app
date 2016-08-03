@@ -5,7 +5,7 @@ import { HTTP_PROVIDERS, Http } from '@angular/http';
 
 import { enableProdMode } from '@angular/core';
 
-import { AuthHttp, AuthConfig } from './services/auth.service';
+import { AuthService, AuthConfig } from './services/auth.service';
 import { Login } from './components/pages/public/login-page/login-page';
 
 // enableProdMode();
@@ -31,10 +31,9 @@ export class App {
 bootstrap(App, [
     ROUTER_PROVIDERS,
     HTTP_PROVIDERS,
-    AuthConfig,
-    provide(AuthHttp, {
+    provide(AuthService, {
         useFactory: (http) => {
-          return new AuthHttp(new AuthConfig({
+          return new AuthService(new AuthConfig({
               headerName: 'Authorization',
               headerPrefix: 'Bearer',
               clientId: 'AAABBBCCC',
@@ -42,7 +41,7 @@ bootstrap(App, [
               tokenName: 'id_token',
               userInfoUrl: 'http://192.168.2.48:8000/me/',
               tokenGetter: (() => localStorage.getItem(this.tokenName)),
-              globalHeaders: [{'Content-Type':'application/json'}],
+              //globalHeaders: [{'Content-Type':'application/json'}],
               noJwtError: true
           }), http);
         },

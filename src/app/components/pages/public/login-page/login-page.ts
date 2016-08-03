@@ -6,7 +6,7 @@ import { AuthService } from '../../../../services/auth.service';
 @Component({
     selector: 'login-page',
     directives: [RouterLink],
-    providers: [AuthService],
+    providers: [],
     templateUrl: './app/components/pages/public/login-page/login-page.html',
 })
 
@@ -15,13 +15,10 @@ export class Login {
 
     doLogin(event, username, password) {
         event.preventDefault();
-        console.log('doLogin');
-
         this.authService.login(username, password);
         if (this.authService.authenticated) {
             this.router.parent.navigateByUrl('/dashboard');
         }
-
         console.log('Failed');
     }
 }
