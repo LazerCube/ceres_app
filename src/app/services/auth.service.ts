@@ -37,7 +37,7 @@ export class AuthConfig {
     } else if (config.noTokenScheme) {
       this.headerPrefix = '';
     } else {
-      this.headerPrefix = 'Bearer ';
+      this.headerPrefix = 'Bearer';
     }
     this.tokenName = config.tokenName || 'id_token';
     this.noJwtError = config.noJwtError || false;

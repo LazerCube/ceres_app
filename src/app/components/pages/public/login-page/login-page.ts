@@ -1,12 +1,12 @@
 import { Component } from "@angular/core";
 import { Router, RouterLink } from '@angular/router-deprecated';
 
-import { AuthService } from './app/services/auth.service';
+import { AuthService } from '../../../../services/auth.service';
 
 @Component({
     selector: 'login-page',
     directives: [RouterLink],
-    providers: [],
+    providers: [AuthService],
     templateUrl: './app/components/pages/public/login-page/login-page.html',
 })
 
@@ -18,7 +18,7 @@ export class Login {
         console.log('doLogin');
 
         this.authService.login(username, password);
-        if(this.authService.authenticated) {
+        if (this.authService.authenticated) {
             this.router.parent.navigateByUrl('/dashboard');
         }
 

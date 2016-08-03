@@ -1,7 +1,7 @@
 import { bootstrap }    from '@angular/platform-browser-dynamic';
 import { Component, provide } from '@angular/core';
 import { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from '@angular/router-deprecated';
-import { HTTP_PROVIDERS, Http } from '@angular/http
+import { HTTP_PROVIDERS, Http } from '@angular/http';
 
 import { enableProdMode } from '@angular/core';
 
@@ -28,14 +28,10 @@ export class App {
     title = 'Ceres app';
 }
 
-var providers = [
-    HTTP_PROVIDERS,
-    ROUTER_PROVIDERS,
-];
-
 bootstrap(App, [
     ROUTER_PROVIDERS,
     HTTP_PROVIDERS,
+    AuthConfig,
     provide(AuthHttp, {
         useFactory: (http) => {
           return new AuthHttp(new AuthConfig({
