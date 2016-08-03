@@ -1,17 +1,27 @@
-import {Component} from "@angular/core";
+import { Component } from "@angular/core";
+import { Router, RouterLink } from '@angular/router-deprecated';
+
+import { AuthService } from './app/services/auth.service';
 
 @Component({
     selector: 'login-page',
-    directives: [],
+    directives: [RouterLink],
     providers: [],
     templateUrl: './app/components/pages/public/login-page/login-page.html',
 })
 
 export class Login {
-    constructor() {}
+    constructor(private authService: AuthService, private router: Router) {}
 
     doLogin(event, username, password) {
-        console.log('Login');
-    }
+        event.preventDefault();
+        console.log('doLogin');
 
+        this.authService.login(username, password);
+        if(this.authService.authenticated) {
+            this.router.parent.navigateByUrl('/dashboard');
+        }
+
+        console.log('Failed');
+    }
 }

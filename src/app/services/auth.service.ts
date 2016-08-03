@@ -277,7 +277,7 @@ export class AuthService {
                     +  "&password=" + password
                     +  "&client_id=" + this._config.clientId;
 
-        this.authHttp.get(this._config.tokenUrl, data, { headers: headers })
+        this.authHttp.post(this._config.tokenUrl, data, { headers: headers })
         .subscribe(
             data => {
                 localStorage.setItem(this._config.tokenName, data.json().id_token);
