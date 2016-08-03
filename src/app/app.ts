@@ -14,7 +14,7 @@ import {enableProdMode} from '@angular/core';
 })
 
 export class App {
-    title = 'Ceres app'
+    title = 'Ceres app';
 }
 
 bootstrap(App);
