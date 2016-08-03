@@ -264,21 +264,31 @@ export class AuthService {
         return tokenNotExpired();
     }
 
+    private logError(err) {
+        console.error('There was an error: ' + err);
+    }
+
     public login(username, password) {
         let headers = new Headers();
-        let creds = JSON.stringify({ username: username.value, password: password.value });
         headers.append('Content-Type', 'application/x-www-form-urlencoded');
 
-        this.authHttp.get(this._config.tokenUrl, creds, { headers: headers })
-            .subscribe(
-            );
+        let data = "grant_type=password&username="
+                    +  "&username=" + username
+                    +  "&password=" + password
+                    +  "&client_id=" + this._config.clientId;
 
-
-
+        this.authHttp.get(this._config.tokenUrl, data, { headers: headers })
+        .subscribe(
+            data => {
+                localStorage.setItem(this._config.tokenName, data.json().id_token);
+            },
+            err => this.logError(err.json().message),
+            () => console.log('Authentication Complete')
+        );
     }
 
     public logout() {
-        // localStorage.remove(this._config.tokenName));
+        localStorage.removeItem(this._config.tokenName);
     }
 
 }
