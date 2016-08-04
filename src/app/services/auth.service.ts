@@ -156,8 +156,9 @@ export class AuthService {
         return this.requestHelper({ url:  url, method: RequestMethod.Head }, options);
     }
 
-    public authenticated() {
-        return tokenNotExpired();
+    public authenticated(): boolean {
+        // return tokenNotExpired(this._config.tokenName);
+        return (localStorage.getItem(this._config.tokenName) != null);
     }
 
     private logError(err) {
@@ -176,11 +177,14 @@ export class AuthService {
         this.post(this._config.tokenUrl, data, { headers: myHeaders } )
             .subscribe(
                 data => {
-                localStorage.setItem(this._config.tokenName, data.json().id_token);
+                localStorage.setItem(this._config.tokenName, data.json().access_token);
             },
-            err => this.logError(err.json().message),
-            () => console.log('Authentication Complete')
+            err => console.log(err.text()),
+            () => {
+                console.log('Authentication Complete');
+            },
         );
+        return this.authenticated();
     }
 
     public logout() {

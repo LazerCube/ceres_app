@@ -14,11 +14,9 @@ export class Login {
     constructor(private authService: AuthService, private router: Router) {}
 
     doLogin(event, username, password) {
-        event.preventDefault();
-        this.authService.login(username, password);
-        if (this.authService.authenticated) {
+        if (this.authService.login(username, password)) {
+            console.log("/dash");
             this.router.parent.navigateByUrl('/dashboard');
         }
-        console.log('Failed');
     }
 }
