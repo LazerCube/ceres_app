@@ -11,12 +11,33 @@ import { AuthService } from '../../../../services/auth.service';
 })
 
 export class Login {
-    constructor(private authService: AuthService, private router: Router) {}
+    constructor(private authService: AuthService, public router: Router) {}
 
-    doLogin(event, username, password) {
-        if (this.authService.login(username, password)) {
-            console.log("/dash");
-            this.router.parent.navigateByUrl('/dashboard');
-        }
+    login(event, username, password) {
+        event.preventDefault();
+        this.authService.login(username, password)
+            .subscribe(
+                 data => {
+                     localStorage.setItem("id_token", data.json().access_token);
+                 },
+                 err => console.log(err.text()),
+                 () => {
+                     console.log("Authorizated");
+                     this.router.parent.navigate(['Home-Page']);
+                 }
+            );
     }
+
+    signup(event) {
+        event.preventDefault();
+        this.router.parent.navigateByUrl('/signup');
+    }
+
+    // doLogin(event, username, password) {
+    //     event.preventDefault();
+    //     this.authService.login(username, password, function(router: Router) {
+    //         console.log("Authorizated");
+    //         this.router.parent.navigate(['Home-Page']);
+    //     });
+    // }
 }

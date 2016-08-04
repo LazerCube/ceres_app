@@ -2,6 +2,8 @@ import {Http, Headers, Request, RequestOptions, RequestOptionsArgs, RequestMetho
 import { Injectable, provide } from "@angular/core";
 import {Observable} from 'rxjs/Observable';
 
+import { Router } from '@angular/router-deprecated';
+
 declare var escape: any;
 
 export interface IAuthConfig {
@@ -103,15 +105,7 @@ export class AuthService {
 
         // from this point url is always an instance of Request;
         let req: Request = <Request>url;
-        if (!tokenNotExpired(null, this._config.tokenGetter())) {
-            if (!this._config.noJwtError) {
-                return new Observable<Response>((obs: any) => {
-                    obs.error(new Error('No JWT present or has expired'));
-                });
-            }
-        } else {
-            req.headers.set(this._config.headerName, this._config.headerPrefix + this._config.tokenGetter());
-        }
+        req.headers.set(this._config.headerName, this._config.headerPrefix + this._config.tokenGetter());
         return this.http.request(req);
     }
 
@@ -156,40 +150,37 @@ export class AuthService {
         return this.requestHelper({ url:  url, method: RequestMethod.Head }, options);
     }
 
-    public authenticated(): boolean {
-        // return tokenNotExpired(this._config.tokenName);
-        return (localStorage.getItem(this._config.tokenName) != null);
-    }
-
-    private logError(err) {
-        console.error('There was an error: ' + err);
-    }
-
-    public login(username, password) {
-        var myHeaders = new Headers();
+    public login(username: string, password: string) : Observable<Response> {
+        let myHeaders = new Headers();
         myHeaders.append('Content-Type', 'application/x-www-form-urlencoded');
-
-        let data = "grant_type=password"
-                    +  "&username=" + username
-                    +  "&password=" + password
-                    +  "&client_id=" + this._config.clientId;
-
-        this.post(this._config.tokenUrl, data, { headers: myHeaders } )
-            .subscribe(
-                data => {
-                localStorage.setItem(this._config.tokenName, data.json().access_token);
-            },
-            err => console.log(err.text()),
-            () => {
-                console.log('Authentication Complete');
-            },
-        );
-        return this.authenticated();
+        let body = "grant_type=password" + "&username=" + username + "&password=" + password + "&client_id=" + this._config.clientId;
+        return this.requestHelper({ url:  this._config.tokenUrl, body: body, method: RequestMethod.Post }, { headers: myHeaders });
     }
 
-    public logout() {
-        localStorage.removeItem(this._config.tokenName);
-    }
+    // private logError(err) {
+    //     console.error('There was an error: ' + err);
+    // }
+
+    // public login(username, password, callback) {
+    //     let myHeaders = new Headers();
+    //     myHeaders.append('Content-Type', 'application/x-www-form-urlencoded');
+    //
+    //     let data = "grant_type=password"
+    //                 +  "&username=" + username
+    //                 +  "&password=" + password
+    //                 +  "&client_id=" + this._config.clientId;
+    //
+    //     this.post(this._config.tokenUrl, data, { headers: myHeaders } )
+    //         .subscribe(
+    //             data => {
+    //                 localStorage.setItem(this._config.tokenName, data.json().access_token);
+    //         },
+    //         err => console.log(err.text()),
+    //         () => {
+    //             callback();
+    //         }
+    //     );
+    // }
 
 }
 
@@ -261,22 +252,26 @@ export function tokenNotExpired(tokenName = 'id_token', jwt?:string):boolean {
     return token && !jwtHelper.isTokenExpired(token, null);
 }
 
-    export const AUTH_PROVIDERS: any = [
+export function authenticated(tokenName = 'id_token'): boolean {
+    return (localStorage.getItem(tokenName) != null);
+}
+
+export const AUTH_PROVIDERS: any = [
+    provide(AuthService, {
+        useFactory: (http: Http, options: RequestOptions) => {
+            return new AuthService(new AuthConfig(), http, options);
+        },
+        deps: [Http, RequestOptions]
+    })
+];
+
+export function provideAuth(config = {}): any[] {
+    return [
         provide(AuthService, {
             useFactory: (http: Http, options: RequestOptions) => {
-                return new AuthService(new AuthConfig(), http, options);
+                return new AuthService(new AuthConfig(config), http, options);
             },
-            deps: [Http, RequestOptions]
-        })
-    ];
-
-    export function provideAuth(config = {}): any[] {
-        return [
-            provide(AuthService, {
-                useFactory: (http: Http, options: RequestOptions) => {
-                    return new AuthService(new AuthConfig(config), http, options);
-                },
-            deps: [Http, RequestOptions]
+        deps: [Http, RequestOptions]
         })
     ];
 }

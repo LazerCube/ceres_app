@@ -6,7 +6,9 @@ import { HTTP_PROVIDERS, Http } from '@angular/http';
 import { enableProdMode } from '@angular/core';
 
 import { AuthService, AuthConfig } from './services/auth.service';
+
 import { Login } from './components/pages/public/login-page/login-page';
+import { HomePage } from './components/pages/protected/home-page/home-page';
 
 // enableProdMode();
 
@@ -21,6 +23,11 @@ import { Login } from './components/pages/public/login-page/login-page';
         path: '',
         name: 'Login',
         component: Login,
+    },
+    {
+        path: '/home',
+        name: 'Home-Page',
+        component: HomePage,
     },
 ])
 
@@ -40,7 +47,7 @@ bootstrap(App, [
               tokenUrl: 'http://192.168.2.48:8000/token/',
               tokenName: 'id_token',
               userInfoUrl: 'http://192.168.2.48:8000/me/',
-              tokenGetter: (() => localStorage.getItem(this.tokenName)),
+              tokenGetter: (localStorage.getItem(this.tokenName)),
               //globalHeaders: [{'Content-Type':'application/json'}],
               noJwtError: true
           }), http);
