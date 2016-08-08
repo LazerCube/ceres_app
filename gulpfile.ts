@@ -10,6 +10,7 @@ const tslint = require('gulp-tslint');
 const sass = require('gulp-sass');
 const watch = require('gulp-watch');
 
+
 /**
  * Remove build directory.
  */
@@ -66,10 +67,12 @@ gulp.task("libs", () => {
  * Compiles SASS files.
  */
 gulp.task('scss', () => {
-    return gulp.src('bootstrap/scss/*.scss')
-          .pipe(sass().on('error', sass.logError))
-          .pipe(sass({outputStyle: 'compressed'}))
-          .pipe(gulp.dest('src/css'));
+    return gulp.src('bootstrap/scss/bootstrap.scss')
+        .pipe(sourcemaps.init())
+        .pipe(sass().on('error', sass.logError))
+        // .pipe(sass({outputStyle: 'compressed'})
+        .pipe(sourcemaps.write())
+        .pipe(gulp.dest('src/css'));
 });
 
 /**
@@ -84,12 +87,12 @@ gulp.task('watch', function () {
     });
     gulp.watch('bootstrap/**/*.scss', ['scss']).on('change', function (e) {
         console.log('SASS file ' + e.path + ' has been changed. Compiling.');
-    });;
+    });
 });
 
 /**
  * Build the project.
  */
-gulp.task("build", ['compile', 'resources', 'libs'], () => {
+gulp.task("build", ['compile', 'scss', 'resources', 'libs'], () => {
     console.log("Building the project ...");
 });
