@@ -1,24 +1,23 @@
 /*!
- * Bootstrap v4.0.0-alpha.2 (http://getbootstrap.com)
- * Copyright 2011-2015 Twitter, Inc.
- * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+ * Bootstrap v4.0.0 alpha.2 (http://getbootstrap.com)
+ * Ceres - Custom Build (http://github.com/lazercube/ceres_app)
  */
 
 // Core variables and mixins
 @import "helpers/variables";
 @import "helpers/mixins";
 
-// // Reset and dependencies 
+// // Reset and dependencies
 @import "reset/normalize";
 @import "reset/print";
 
 // Core CSS
-@import "core/reboot";  
+@import "core/reboot";
 @import "core/type";
 @import "core/images";
 @import "core/code";
 @import "core/grid";
-@import "core/tables"; 
+@import "core/tables";
 @import "core/forms";
 @import "core/buttons";
 
@@ -28,7 +27,7 @@
 @import "components/dropdown";
 @import "components/button-group";
 @import "components/input-group";
-@import "components/custom-forms"; 
+@import "components/custom-forms";
 @import "components/nav";
 @import "components/navbar";
 @import "components/card";
@@ -42,7 +41,7 @@
 @import "components/media";
 @import "components/list-group";
 @import "components/responsive-embed";
-@import "components/close"; 
+@import "components/close";
 
 // Components w/ JavaScript
 @import "components/modal";
