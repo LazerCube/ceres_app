@@ -30,11 +30,6 @@ export class HomePage implements OnInit {
             .subscribe(user => this.user = user);
     }
 
-    logout() {
-        localStorage.removeItem("id_token");
-        this.router.parent.navigateByUrl('/');
-    }
-
     ngOnInit() {
         this.getInformation();
     }

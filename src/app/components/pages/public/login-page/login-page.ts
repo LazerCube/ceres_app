@@ -32,12 +32,4 @@ export class Login {
         event.preventDefault();
         this.router.parent.navigateByUrl('/signup');
     }
-
-    // doLogin(event, username, password) {
-    //     event.preventDefault();
-    //     this.authService.login(username, password, function(router: Router) {
-    //         console.log("Authorizated");
-    //         this.router.parent.navigate(['Home-Page']);
-    //     });
-    // }
 }

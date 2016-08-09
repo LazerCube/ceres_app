@@ -7,6 +7,8 @@ import { enableProdMode } from '@angular/core';
 
 import { AuthService, AuthConfig } from './services/auth.service';
 
+import { Navbar } from './components/navbar/navbar';
+
 import { Login } from './components/pages/public/login-page/login-page';
 import { HomePage } from './components/pages/protected/home-page/home-page';
 
@@ -15,7 +17,7 @@ import { HomePage } from './components/pages/protected/home-page/home-page';
 @Component({
   selector: 'app',
   templateUrl: './app/app.html',
-  directives: [ROUTER_DIRECTIVES],
+  directives: [Navbar, ROUTER_DIRECTIVES],
 })
 
 @RouteConfig([
@@ -32,7 +34,6 @@ import { HomePage } from './components/pages/protected/home-page/home-page';
 ])
 
 export class App {
-    title = 'Ceres app';
 }
 
 bootstrap(App, [
