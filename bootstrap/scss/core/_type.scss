@@ -11,6 +11,11 @@ h1, h2, h3, h4, h5, h6,
   color: $headings-color;
 }
 
+h1, h2, h3,
+.h1, .h2, .h3 {
+    margin-top: $headings-margin-top;
+}
+
 h1 { font-size: $font-size-h1; }
 h2 { font-size: $font-size-h2; }
 h3 { font-size: $font-size-h3; }
@@ -70,8 +75,9 @@ hr {
 
 small,
 .small {
-  font-size: 80%;
+  font-size: 65%;
   font-weight: normal;
+  color: $text-muted;
 }
 
 mark,

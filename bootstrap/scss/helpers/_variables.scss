@@ -16,6 +16,7 @@
 // Grid columns
 // Fonts
 // Components
+// Extras
 
 // General variable structure
 //
@@ -26,17 +27,19 @@
 //
 // Grayscale and brand colors for use across Bootstrap.
 
-$gray-dark:                 #373a3c !default;
-$gray:                      #55595c !default;
-$gray-light:                #818a91 !default;
+$gray-dark:                 #262a33 !default;
+$gray:                      #46494C !default;
+$gray-light:                #838999 !default;
 $gray-lighter:              #eceeef !default;
 $gray-lightest:             #f7f7f9 !default;
 
-$brand-primary:             #0275d8 !default;
+$highlight:                 #dadbdf !default;
+
+$brand-primary:             #45c8dc !default;
 $brand-success:             #5cb85c !default;
 $brand-info:                #5bc0de !default;
 $brand-warning:             #f0ad4e !default;
-$brand-danger:              #d9534f !default;
+$brand-danger:              #fC4545 !default;
 
 
 // Options
@@ -85,8 +88,8 @@ $border-width:               1px !default;
 //
 // Settings for the `<body>` element.
 
-$body-bg:                    #fff !default;
-$body-color:                 $gray-dark !default;
+$body-bg:                    #f0f0f0 !default;
+$body-color:                 $gray !default;
 
 
 // Links
@@ -142,21 +145,21 @@ $grid-gutter-width:          1.875rem !default; // 30px
 //
 // Font, line-height, and color for body text, headings, and more.
 
-$font-family-sans-serif:     "Helvetica Neue", Helvetica, Arial, sans-serif !default;
+$font-family-sans-serif:     "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif !default;
 $font-family-serif:          Georgia, "Times New Roman", Times, serif !default;
 $font-family-monospace:      Menlo, Monaco, Consolas, "Courier New", monospace !default;
 $font-family-base:           $font-family-sans-serif !default;
 
 // Pixel value used to responsively scale all typography. Applied to the `<html>` element.
-$font-size-root:             16px !default;
+$font-size-root:             14px !default;
 
 $font-size-base:             1rem !default;
 $font-size-lg:               1.25rem !default;
 $font-size-sm:               .875rem !default;
 $font-size-xs:               .75rem !default;
 
-$font-size-h1:               2.5rem !default;
-$font-size-h2:               2rem !default;
+$font-size-h1:               2.7rem !default;
+$font-size-h2:               2.25rem !default;
 $font-size-h3:               1.75rem !default;
 $font-size-h4:               1.5rem !default;
 $font-size-h5:               1.25rem !default;
@@ -175,8 +178,9 @@ $display4-weight:             300 !default;
 $line-height:                1.5 !default;
 
 $headings-margin-bottom:     ($spacer / 2) !default;
+$headings-margin-top:        (($spacer / 2) + $spacer) !default
 $headings-font-family:       inherit !default;
-$headings-font-weight:       500 !default;
+$headings-font-weight:       600 !default;
 $headings-line-height:       1.1 !default;
 $headings-color:             inherit !default;
 
@@ -191,7 +195,7 @@ $blockquote-small-color:      $gray-light !default;
 $blockquote-font-size:        ($font-size-base * 1.25) !default;
 $blockquote-border-color:     $gray-lighter !default;
 
-$hr-border-color:             rgba(0,0,0,.1) !default;
+$hr-border-color:             $highlight !default;
 $hr-border-width:             $border-width !default;
 
 $dt-font-weight:              bold !default;
@@ -476,13 +480,14 @@ $state-danger-border:            darken($state-danger-bg, 5%) !default;
 
 // Cards
 $card-spacer-x:            1.25rem !default;
-$card-spacer-y:            .75rem !default;
+$card-spacer-y:            1.25rem !default;
 $card-border-width:        1px !default;
-$card-border-radius:       $border-radius !default;
-$card-border-color:        #e5e5e5 !default;
+$card-border-radius:       $border-radius-sm !default;
+$card-border-color:        $highlight !default;
 $card-border-radius-inner: $card-border-radius !default;
-$card-cap-bg:              #f5f5f5 !default;
-$card-bg:                  #fff !default;
+$card-bg:                  #f8f8f8 !default;
+$card-cap-bg:              $card-bg !default;
+
 
 $card-link-hover-color:    #fff !default;
 
@@ -664,3 +669,9 @@ $pre-bg:                      #f7f7f9 !default;
 $pre-color:                   $gray-dark !default;
 $pre-border-color:            #ccc !default;
 $pre-scrollable-max-height:   340px !default;
+
+// Extras
+//
+// form-signin
+
+$form-signin-max-width:     540px !default;
