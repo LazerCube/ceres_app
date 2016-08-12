@@ -1,6 +1,6 @@
 import {Http, Headers, Request, RequestOptions, RequestOptionsArgs, RequestMethod, Response} from '@angular/http';
 import { Injectable, provide } from "@angular/core";
-import {Observable} from 'rxjs/Observable';
+import { Observable } from 'rxjs/Observable';
 
 import { Router } from '@angular/router-deprecated';
 

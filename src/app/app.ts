@@ -5,9 +5,13 @@ import { HTTP_PROVIDERS, Http } from '@angular/http';
 
 import { enableProdMode } from '@angular/core';
 
-import { AuthService, AuthConfig } from './services/auth.service';
+import { LoggedInRouterOutlet } from './components/navigation/loggedInOutlet';
 
-import { Navbar } from './components/navbar/navbar';
+import { AuthService, AuthConfig } from './services/auth.service';
+import { EventsService } from './services/events.service';
+
+import { Navbar } from './components/navigation/navbar/navbar';
+import { Sidebar } from './components/navigation/sidebar/sidebar';
 
 import { Login } from './components/pages/public/login-page/login-page';
 import { HomePage } from './components/pages/protected/home-page/home-page';
@@ -17,7 +21,7 @@ import { HomePage } from './components/pages/protected/home-page/home-page';
 @Component({
   selector: 'app',
   templateUrl: './app/app.html',
-  directives: [Navbar, ROUTER_DIRECTIVES],
+  directives: [Navbar, Sidebar, LoggedInRouterOutlet],
 })
 
 @RouteConfig([
@@ -39,6 +43,7 @@ export class App {
 bootstrap(App, [
     ROUTER_PROVIDERS,
     HTTP_PROVIDERS,
+    EventsService,
     provide(AuthService, {
         useFactory: (http) => {
           return new AuthService(new AuthConfig({

@@ -12,8 +12,6 @@ import { UserService, User } from '../../../../services/user.service';
     templateUrl: './app/components/pages/protected/home-page/home-page.html',
 })
 
-@CanActivate(() => authenticated())
-
 export class HomePage implements OnInit {
     user: User[];
     constructor(private authService: AuthService, private router: Router, private userService: UserService) { }

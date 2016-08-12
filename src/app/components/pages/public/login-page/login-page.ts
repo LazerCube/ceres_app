@@ -2,6 +2,7 @@ import { Component } from "@angular/core";
 import { Router, RouterLink } from '@angular/router-deprecated';
 
 import { AuthService } from '../../../../services/auth.service';
+import { EventsService } from '../../../../services/events.service';
 
 @Component({
     selector: 'login-page',
@@ -11,7 +12,12 @@ import { AuthService } from '../../../../services/auth.service';
 })
 
 export class Login {
-    constructor(private authService: AuthService, public router: Router) {}
+    public errorMsg:string = '';
+
+    constructor(
+        private authService: AuthService,
+        public router: Router,
+        private eventsService: EventsService) {}
 
     login(event, username, password) {
         event.preventDefault();
@@ -23,6 +29,7 @@ export class Login {
                  err => console.log(err.text()),
                  () => {
                      console.log("Authorizated");
+                     this.eventsService.showNavigation.emit(true);
                      this.router.parent.navigate(['Home-Page']);
                  }
             );
