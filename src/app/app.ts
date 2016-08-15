@@ -1,5 +1,5 @@
 import { bootstrap }    from '@angular/platform-browser-dynamic';
-import { Component, provide } from '@angular/core';
+import { Component, provide, OnInit } from '@angular/core';
 import { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from '@angular/router-deprecated';
 import { HTTP_PROVIDERS, Http } from '@angular/http';
 
@@ -7,7 +7,7 @@ import { enableProdMode } from '@angular/core';
 
 import { LoggedInRouterOutlet } from './components/navigation/loggedInOutlet';
 
-import { AuthService, AuthConfig } from './services/auth.service';
+import { AuthService, AuthConfig, authenticated } from './services/auth.service';
 import { EventsService } from './services/events.service';
 
 import { Navbar } from './components/navigation/navbar/navbar';
@@ -37,7 +37,22 @@ import { HomePage } from './components/pages/protected/home-page/home-page';
     },
 ])
 
-export class App {
+export class App implements OnInit {
+    private class: string = "";
+
+    constructor(private authService:AuthService, private eventsService: EventsService) {
+        this.eventsService.showNavigation.subscribe((mode: boolean) => {
+            if (mode) {
+                this.class = "col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main";
+            } else {
+                this.class = "main";
+            }
+        });
+    }
+
+    ngOnInit() {
+        this.eventsService.showNavigation.emit(authenticated());
+    }
 }
 
 bootstrap(App, [
