@@ -1,0 +1,47 @@
+<div class="" style="padding-top:60px;">
+    <form class="form-signin" role="form" (submit)="signup()">
+        <fieldset>
+            <div class="card">
+                <div class="card-block">
+                    <legend>Signup</legend>
+                    <hr>
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input id="username"
+                        type="text" class="form-control" placeholder="Username">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input id="email"
+                        type="email" class="form-control" placeholder="Email">
+                    </div>
+                    <div class="form-group">
+                        <label for="first_name">First Name</label>
+                        <input id="first_name"
+                        type="text" class="form-control" placeholder="First Name">
+                    </div>
+                    <div class="form-group">
+                        <label for="last_name">Last Name</label>
+                        <input id="last_name"
+                        type="text" class="form-control" placeholder="Last Name">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Last Name</label>
+                        <input id="password"
+                        type="password" class="form-control" placeholder="Password">
+                    </div>
+                    <div class="form-group">
+                        <label for="confirm_password">Confirm password</label>
+                        <input id="confirm_password"
+                        type="password" class="form-control" placeholder="Confirm password">
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Submit</button>
+                </div>
+                <div class="card-footer">
+                    <a class="card-link" [routerLink]="['Login']" >Login</a>
+                    <a class="card-link" href="#forgot password" >Forgot your password</a>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+</div>

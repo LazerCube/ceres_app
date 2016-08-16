@@ -5,9 +5,11 @@ import { AuthService, authenticated } from '../../../../services/auth.service';
 
 import { UserService, User } from '../../../../services/user.service';
 
+import { UsersComponent } from '../../../user/user.component';
+
 @Component({
     selector: 'Home-Page',
-    directives: [RouterLink],
+    directives: [RouterLink, UsersComponent],
     providers: [UserService],
     templateUrl: './app/components/pages/protected/home-page/home-page.html',
 })
@@ -29,6 +31,6 @@ export class HomePage implements OnInit {
     }
 
     ngOnInit() {
-        this.getInformation();
+        //this.getInformation();
     }
 }

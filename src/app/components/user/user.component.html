@@ -1,0 +1,17 @@
+<h2>My Users</h2>
+
+<div *ngIf="users">
+    <ul class="users">
+        <li *ngFor="let user of users | derp" (click)="onSelect(user)" [class.selected]="user === selectedUser">
+            <div class="user clearfix">
+                <span>{{ user.username }}</span>
+            </div>
+        </li>
+    </ul>
+
+    <div *ngIf="selectedUser">
+        <h2>
+            {{ selectedUser.username | uppercase }} is my user
+        </h2>
+    </div>
+</div>

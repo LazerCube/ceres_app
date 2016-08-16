@@ -10,14 +10,19 @@ export class User {
     url: string;
     id: number;
     username: string;
+    email:string;
     created_at: string;
     updated_at: string;
     first_name: string;
     last_name: string;
+    password:string;
+    confirm_password:string;
 }
 
 @Injectable()
 export class UserService {
+    private userUrl = 'http://localhost:8000/accounts/';  // URL to web api
+
     constructor(private authService: AuthService) { }
 
     getSelf(): Observable<User[]> {
@@ -26,9 +31,47 @@ export class UserService {
             .catch(this.handleError);
     }
 
+    getUser(id: number) {
+        return this.authService.get(this.userUrl + "" + id + "/")
+            .map(this.extractData)
+            .catch(this.handleError);
+    }
+
+    save(user: User): Observable<User[]> {
+        if (user.id) {
+            return this.put(user);
+        }
+        return this.post(user);
+    }
+
+    // Add new User
+    private post(user: User): Observable<User[]> {
+        return this.authService.post(this.userUrl, JSON.stringify(user))
+            .map(this.extractData)
+            .catch(this.handleError);
+    }
+
+    // Update existing User
+    private put(user: User): Observable<User[]> {
+        let url = this.userUrl + "" + user.id + "/";
+
+        return this.authService.put(url, JSON.stringify(user))
+            .map(this.extractData)
+            .catch(this.handleError);
+    }
+
     private extractData(res: Response) {
-        let data = res.json();
-        return data;
+        let body = res.json();
+
+        if (body) {
+            if (body.results) {
+                return body.results;
+            } else {
+                return body;
+            }
+        } else {
+            return [];
+        }
     }
 
     private handleError (error: any) {

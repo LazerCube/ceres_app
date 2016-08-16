@@ -14,6 +14,7 @@ import { Navbar } from './components/navigation/navbar/navbar';
 import { Sidebar } from './components/navigation/sidebar/sidebar';
 
 import { Login } from './components/pages/public/login-page/login-page';
+import { Signup } from './components/pages/public/signup-page/signup-page';
 import { HomePage } from './components/pages/protected/home-page/home-page';
 
 // enableProdMode();
@@ -29,6 +30,11 @@ import { HomePage } from './components/pages/protected/home-page/home-page';
         path: '',
         name: 'Login',
         component: Login,
+    },
+    {
+        path: '/signup',
+        name: 'Signup',
+        component: Signup,
     },
     {
         path: '/home',
