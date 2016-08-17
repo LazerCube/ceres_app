@@ -9,6 +9,7 @@ import { LoggedInRouterOutlet } from './components/navigation/loggedInOutlet';
 
 import { AuthService, AuthConfig, authenticated } from './services/auth.service';
 import { EventsService } from './services/events.service';
+import { UserService } from './services/user.service';
 
 import { Navbar } from './components/navigation/navbar/navbar';
 import { Sidebar } from './components/navigation/sidebar/sidebar';
@@ -16,6 +17,7 @@ import { Sidebar } from './components/navigation/sidebar/sidebar';
 import { Login } from './components/pages/public/login-page/login-page';
 import { Signup } from './components/pages/public/signup-page/signup-page';
 import { HomePage } from './components/pages/protected/home-page/home-page';
+import { UserProfile } from './components/pages/protected/user-page/user-page';
 
 // enableProdMode();
 
@@ -41,6 +43,11 @@ import { HomePage } from './components/pages/protected/home-page/home-page';
         name: 'Home-Page',
         component: HomePage,
     },
+    {
+        path: '/profile/:id',
+        name: 'User-Profile',
+        component: UserProfile
+    },
 ])
 
 export class App implements OnInit {
@@ -65,6 +72,7 @@ bootstrap(App, [
     ROUTER_PROVIDERS,
     HTTP_PROVIDERS,
     EventsService,
+    UserService,
     provide(AuthService, {
         useFactory: (http) => {
           return new AuthService(new AuthConfig({
@@ -75,7 +83,7 @@ bootstrap(App, [
               tokenName: 'id_token',
               userInfoUrl: 'http://192.168.2.48:8000/me/',
               tokenGetter: (localStorage.getItem(this.tokenName)),
-              //globalHeaders: [{'Content-Type':'application/json'}],
+            //   globalHeaders: [{'Content-Type':'application/json'}],
               noJwtError: true
           }), http);
         },

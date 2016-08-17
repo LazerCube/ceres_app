@@ -7,32 +7,32 @@
                     <hr>
                     <div class="form-group">
                         <label for="username">Username</label>
-                        <input id="username"
+                        <input id="username" [(ngModel)]="user.username"
                         type="text" class="form-control" placeholder="Username">
                     </div>
                     <div class="form-group">
                         <label for="email">Email</label>
-                        <input id="email"
+                        <input id="email" [(ngModel)]="user.email"
                         type="email" class="form-control" placeholder="Email">
                     </div>
                     <div class="form-group">
                         <label for="first_name">First Name</label>
-                        <input id="first_name"
+                        <input id="first_name" [(ngModel)]="user.first_name"
                         type="text" class="form-control" placeholder="First Name">
                     </div>
                     <div class="form-group">
                         <label for="last_name">Last Name</label>
-                        <input id="last_name"
+                        <input id="last_name" [(ngModel)]="user.last_name"
                         type="text" class="form-control" placeholder="Last Name">
                     </div>
                     <div class="form-group">
                         <label for="password">Last Name</label>
-                        <input id="password"
+                        <input id="password" [(ngModel)]="user.password"
                         type="password" class="form-control" placeholder="Password">
                     </div>
                     <div class="form-group">
                         <label for="confirm_password">Confirm password</label>
-                        <input id="confirm_password"
+                        <input id="confirm_password" [(ngModel)]="user.confirm_password"
                         type="password" class="form-control" placeholder="Confirm password">
                     </div>
                     <button type="submit" class="btn btn-primary btn-block">Submit</button>

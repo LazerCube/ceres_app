@@ -10,13 +10,13 @@ export class User {
     url: string;
     id: number;
     username: string;
-    email:string;
+    email: string;
     created_at: string;
     updated_at: string;
     first_name: string;
     last_name: string;
-    password:string;
-    confirm_password:string;
+    password: string;
+    confirm_password: string;
 }
 
 @Injectable()
@@ -46,7 +46,7 @@ export class UserService {
 
     // Add new User
     private post(user: User): Observable<User[]> {
-        return this.authService.post(this.userUrl, JSON.stringify(user))
+        return this.authService.post(this.userUrl, JSON.stringify(user), [{'Content-Type':'application/json'}])
             .map(this.extractData)
             .catch(this.handleError);
     }
@@ -55,7 +55,7 @@ export class UserService {
     private put(user: User): Observable<User[]> {
         let url = this.userUrl + "" + user.id + "/";
 
-        return this.authService.put(url, JSON.stringify(user))
+        return this.authService.put(url, JSON.stringify(user), [{'Content-Type':'application/json'}])
             .map(this.extractData)
             .catch(this.handleError);
     }

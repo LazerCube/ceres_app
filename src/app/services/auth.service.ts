@@ -99,10 +99,6 @@ export class AuthService {
         if (typeof url === 'string') {
             return this.get(url, options); // Recursion: transform url from String to Request
         }
-        // else if ( ! url instanceof Request ) {
-        //   throw new Error('First argument must be a url string or Request instance.');
-        // }
-
         // from this point url is always an instance of Request;
         let req: Request = <Request>url;
         req.headers.set(this._config.headerName, this._config.headerPrefix + this._config.tokenGetter());
