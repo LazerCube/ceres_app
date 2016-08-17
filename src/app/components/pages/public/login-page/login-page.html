@@ -1,4 +1,4 @@
-<div class="" style="padding-top:160px;">
+<!-- <div class="" style="padding-top:160px;">
     <form class="form-signin" role="form" (submit)="login($event, username.value, password.value)">
         <fieldset>
             <div class="card">
@@ -22,4 +22,17 @@
             </div>
         </fieldset>
     </form>
-</div>
+</div> -->
+
+<!-- <form [ngFormModel]="loginForm" (submit)="doLogin($event)">
+    <input ngControl="username" id="username" type="text" placeholder="Your username">
+    <input ngControl="password" id="password" type="password" placeholder="Your password">
+    <div [hidden]="password.valid">Invalid</div>
+    <button type="submit" [disabled]="!loginForm.valid">Log in</button>
+</form> -->
+
+<form [ngFormModel]="loginForm" (submit)="doLogin($event)">
+    <input type="text" ngControl="username"/>
+    <p *ngIf="username.dirty && !username.valid">Validation error</p>
+    <button [disabled]="!loginForm.valid">Log in</button>
+</form>
