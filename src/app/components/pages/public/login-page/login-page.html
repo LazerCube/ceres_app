@@ -1,38 +1,5 @@
-<!-- <div class="" style="padding-top:160px;">
-    <form class="form-signin" role="form" (submit)="login($event, username.value, password.value)">
-        <fieldset>
-            <div class="card">
-                <div class="card-block">
-                    <legend>Login</legend>
-                    <hr>
-                    <div class="form-group">
-                        <label for="username">Username</label>
-                        <input type="text" #username class="form-control" id="username" placeholder="Username">
-                    </div>
-                    <div class="form-group">
-                        <label for="password">Password</label>
-                        <input type="password" #password class="form-control" id="password" placeholder="Password">
-                    </div>
-                    <button type="submit" class="btn btn-primary btn-block">Submit</button>
-                </div>
-                <div class="card-footer">
-                    <a class="card-link" [routerLink]="['Signup']" >Register</a>
-                    <a class="card-link" href="#forgot password" >Forgot your password</a>
-                </div>
-            </div>
-        </fieldset>
-    </form>
-</div> -->
-
-<!-- <form [ngFormModel]="loginForm" (submit)="doLogin($event)">
-    <input ngControl="username" id="username" type="text" placeholder="Your username">
-    <input ngControl="password" id="password" type="password" placeholder="Your password">
-    <div [hidden]="password.valid">Invalid</div>
-    <button type="submit" [disabled]="!loginForm.valid">Log in</button>
-</form> -->
-
-<form [ngFormModel]="loginForm" (submit)="doLogin($event)">
-    <input type="text" ngControl="username"/>
-    <p *ngIf="username.dirty && !username.valid">Validation error</p>
-    <button [disabled]="!loginForm.valid">Log in</button>
-</form>
+<div class="" style="padding-top:160px;">
+    <div class="form-signin">
+        <login-form></login-form>
+    </div>
+</div>

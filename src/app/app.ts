@@ -1,5 +1,5 @@
 import { bootstrap }    from '@angular/platform-browser-dynamic';
-import { Component, provide, OnInit } from '@angular/core';
+import { PLATFORM_DIRECTIVES, Component, provide, OnInit } from '@angular/core';
 import { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from '@angular/router-deprecated';
 import { HTTP_PROVIDERS, Http } from '@angular/http';
 
@@ -7,14 +7,17 @@ import { enableProdMode } from '@angular/core';
 
 import { LoggedInRouterOutlet } from './components/navigation/loggedInOutlet';
 
+import { ControlMessagesComponent } from './components/forms/control-messages.component';
+
 import { AuthService, AuthConfig, authenticated } from './services/auth.service';
 import { EventsService } from './services/events.service';
 import { UserService } from './services/user.service';
+import { ValidationService } from './services/validation.service';
 
 import { Navbar } from './components/navigation/navbar/navbar';
 import { Sidebar } from './components/navigation/sidebar/sidebar';
 
-import { Login } from './components/pages/public/login-page/login-page';
+import { LoginPage } from './components/pages/public/login-page/login-page';
 import { Signup } from './components/pages/public/signup-page/signup-page';
 import { HomePage } from './components/pages/protected/home-page/home-page';
 import { UserProfile } from './components/pages/protected/user-page/user-page';
@@ -31,7 +34,7 @@ import { UserProfile } from './components/pages/protected/user-page/user-page';
     {
         path: '',
         name: 'Login',
-        component: Login,
+        component: LoginPage,
     },
     {
         path: '/signup',
@@ -73,6 +76,8 @@ bootstrap(App, [
     HTTP_PROVIDERS,
     EventsService,
     UserService,
+    ValidationService,
+    provide(PLATFORM_DIRECTIVES, {useValue: ControlMessagesComponent, multi: true}),
     provide(AuthService, {
         useFactory: (http) => {
           return new AuthService(new AuthConfig({
@@ -83,7 +88,7 @@ bootstrap(App, [
               tokenName: 'id_token',
               userInfoUrl: 'http://192.168.2.48:8000/me/',
               tokenGetter: (localStorage.getItem(this.tokenName)),
-            //   globalHeaders: [{'Content-Type':'application/json'}],
+              //globalHeaders: [{'Content-Type':'application/json'}],
               noJwtError: true
           }), http);
         },
