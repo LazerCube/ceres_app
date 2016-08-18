@@ -1,6 +1,7 @@
 import { Response } from '@angular/http';
 import { Injectable } from '@angular/core';
-import {Observable} from 'rxjs/Observable';
+import { Observable } from 'rxjs/Observable';
+import { Headers } from '@angular/http';
 
 import 'rxjs/Rx';
 
@@ -46,7 +47,10 @@ export class UserService {
 
     // Add new User
     private post(user: User): Observable<User[]> {
-        return this.authService.post(this.userUrl, JSON.stringify(user), [{'Content-Type':'application/json'}])
+        let _customHeader = new Headers();
+        _customHeader.append('Content-Type', 'application/json');
+
+        return this.authService.post(this.userUrl, JSON.stringify(user), { headers: _customHeader })
             .map(this.extractData)
             .catch(this.handleError);
     }
@@ -54,8 +58,10 @@ export class UserService {
     // Update existing User
     private put(user: User): Observable<User[]> {
         let url = this.userUrl + "" + user.id + "/";
+        let _customHeader = new Headers();
+        _customHeader.append('Content-Type', 'application/json');
 
-        return this.authService.put(url, JSON.stringify(user), [{'Content-Type':'application/json'}])
+        return this.authService.put(url, JSON.stringify(user), { headers: _customHeader })
             .map(this.extractData)
             .catch(this.handleError);
     }
