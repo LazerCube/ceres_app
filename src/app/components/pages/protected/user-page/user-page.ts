@@ -13,7 +13,7 @@ export class UserProfile implements OnInit {
     constructor(
         private _userService: UserService,
         private _routeParams: RouteParams) {
-}
+    }
 
     ngOnInit() {
         if (this._routeParams.get('id') !== null) {

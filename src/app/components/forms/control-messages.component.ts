@@ -1,14 +1,14 @@
 import { Component, Input } from '@angular/core';
-import { ControlGroup, Control } from '@angular/common';
+import { Control } from '@angular/common';
 import { ValidationService } from '../../services/validation.service';
 
 @Component({
-  selector: 'control-messages',
-  template: `<div *ngIf="errorMessage !== null">{{errorMessage}}</div>`
+    selector: 'control-messages',
+    template: `<div *ngIf="errorMessage !== null">{{ errorMessage }}</div>`
 })
 export class ControlMessagesComponent {
-      @Input() control: Control;
-      constructor() { }
+    @Input() control: Control;
+    constructor() { }
 
     get errorMessage() {
         for (let propertyName in this.control.errors) {

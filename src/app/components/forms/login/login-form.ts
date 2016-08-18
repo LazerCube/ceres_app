@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { ControlGroup, Control, FormBuilder, Validators, FORM_DIRECTIVES } from '@angular/common';
+import { FormBuilder, Validators } from '@angular/common';
 import { Router, RouterLink } from '@angular/router-deprecated';
 
 import { AuthService } from '../../../services/auth.service';
@@ -8,28 +8,21 @@ import { ValidationService } from '../../../services/validation.service';
 
 @Component({
     selector: 'login-form',
-    directives: [RouterLink, FORM_DIRECTIVES],
+    directives: [RouterLink],
     templateUrl: './app/components/forms/login/login-form.html',
 })
 export class LoginForm {
-    loginForm: ControlGroup;
-
-    username: Control;
-    password: Control;
+    public loginForm: any;
 
     constructor(
         private _builder: FormBuilder,
         private _authService: AuthService,
         private _router: Router,
-        private eventsService: EventsService) {
-        this.username = new Control("", Validators.required);
-        this.password = new Control("", Validators.compose(
-            [Validators.required, ValidationService.passwordValidator])
-        );
+        private _eventsService: EventsService) {
 
         this.loginForm = _builder.group({
-            username:   this.username,
-            password:   this.password
+            'username': ['', Validators.required],
+            'password': ['', Validators.compose([Validators.required, ValidationService.passwordValidator])]
         });
     }
 
@@ -44,7 +37,7 @@ export class LoginForm {
                      err => console.log(err.text()),
                      () => {
                          console.log("Authorizated");
-                         this.eventsService.showNavigation.emit(true);
+                         this._eventsService.showNavigation.emit(true);
                          this._router.parent.navigate(['Home-Page']);
                      }
                 );
