@@ -77,7 +77,7 @@ bootstrap(App, [
     EventsService,
     UserService,
     ValidationService,
-    provide(PLATFORM_DIRECTIVES, {useValue: ControlMessagesComponent, multi: true}),
+    provide(PLATFORM_DIRECTIVES, {useValue: (ControlMessagesComponent), multi: true}),
     provide(AuthService, {
         useFactory: (http) => {
           return new AuthService(new AuthConfig({

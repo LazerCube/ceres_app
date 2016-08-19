@@ -27,8 +27,10 @@ export class RegistrationForm {
             'email': ['', Validators.required],
             'first_name': ['', Validators.required],
             'last_name': ['', Validators.required],
-            'password': ['', Validators.compose([Validators.required, ValidationService.passwordValidator])],
-            'confirm_password': ['', Validators.compose([Validators.required])],
+            'matching_password' : _builder.group({
+                'password': ['', Validators.compose([Validators.required, ValidationService.passwordValidator])],
+                'confirm_password': ['', Validators.required],
+            }, { validator: ValidationService.areEqual })
         });
     }
 

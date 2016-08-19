@@ -4,6 +4,7 @@ export class ValidationService {
             'required': 'Required',
             'invalidEmailAddress': 'Invalid email address',
             'invalidPassword': 'Invalid password. Password must be at least 6 characters long, and contain a number.',
+            'invalidMatch': 'Inputs don\'t match.',
             'minlength': `Minimum length ${validatorValue.requiredLength}`
         };
         return config[validatorName];
@@ -26,5 +27,29 @@ export class ValidationService {
         } else {
             return { 'invalidPassword': true };
         }
+    }
+
+    static areEqual(group) {
+        let val;
+        let valid = true;
+
+        if (group.pristine) {
+            return null;
+        }
+
+        for (name in group.controls) {
+            if (val === undefined) {
+                val = group.controls[name].value;
+            } else {
+                if (val !== group.controls[name].value) {
+                    valid = false;
+                }
+            }
+        }
+
+        if (valid) {
+            return null;
+        }
+        return { 'invalidMatch': true };
     }
 }
