@@ -20,14 +20,14 @@ export class LoggedInRouterOutlet extends RouterOutlet {
         // denotes whether the route requires authentication to view
         this.publicRoutes = {
             '': true,
-            'signup': true
+            'register': true
         };
     }
 
     activate(instruction: ComponentInstruction) {
         let url = instruction.urlPath;
         if (!this.publicRoutes[url] && !authenticated()) {
-            this.parentRouter.navigate(['Login']);
+            this.parentRouter.navigate(['Login-Page']);
         } else if (this.publicRoutes[url] && authenticated()) {
             this.parentRouter.navigate(['Home-Page']);
         }

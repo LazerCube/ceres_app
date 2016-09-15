@@ -6,12 +6,12 @@ import {
     AuthService,
     EventsService,
     ValidationService,
-} from '../../shared'
+} from '../../shared';
 
 @Component({
     selector: 'login-form',
     directives: [RouterLink],
-    templateUrl: 'user-login-form.component.html',
+    templateUrl: 'app/+users/login/user-login-form.component.html',
 })
 export class LoginForm {
     public loginForm: any;

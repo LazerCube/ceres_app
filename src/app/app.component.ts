@@ -5,9 +5,12 @@ import { HTTP_PROVIDERS, Http } from '@angular/http';
 
 import { enableProdMode } from '@angular/core';
 
-import { UserService } from './services/user.service';
-
-import { LoginPage, RegisterPage, UserProfile } from './+users';
+import {
+    LoginPage,
+    RegisterPage,
+    UserProfile,
+    UserService,
+} from './+users';
 
 import {
     AuthConfig,
@@ -25,8 +28,8 @@ import {
 
 @Component({
   selector: 'app',
-  templateUrl: 'app.component.html',
-  directives: [Navbar, Sidebar, LoggedInRouterOutlet],
+  templateUrl: 'app/app.component.html',
+  directives: [Sidebar, Navbar, LoggedInRouterOutlet],
 })
 
 // @RouteConfig([
@@ -51,7 +54,6 @@ import {
 //         component: UserProfile
 //     },
 // ])
-
 @RouteConfig([
     {
         path: '',

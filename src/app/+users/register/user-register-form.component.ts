@@ -10,12 +10,12 @@ import {
 import {
     EventsService,
     ValidationService,
-} from '../../shared'
+} from '../../shared';
 
 @Component({
     selector: 'registration-form',
     directives: [RouterLink],
-    templateUrl: 'user-registration-form.component.html',
+    templateUrl: 'app/+users/register/user-register-form.component.html',
 })
 export class RegistrationForm {
     private _user: UserModel;

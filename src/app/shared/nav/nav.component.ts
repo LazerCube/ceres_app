@@ -6,8 +6,7 @@ import { EventsService } from '../../shared';
 @Component({
     selector: 'navbar',
     directives: [ROUTER_DIRECTIVES],
-    providers: [],
-    templateUrl: './app/components/navigation/navbar/navbar.html',
+    templateUrl: '/app/shared/nav/nav.component.html',
 })
 export class Navbar {
     public title = 'Ceres app';
@@ -23,6 +22,6 @@ export class Navbar {
     doLogout() {
         localStorage.removeItem("id_token");
         this._eventsService.showNavigation.emit(false);
-        this._router.navigate(['Login']);
+        this._router.navigate(['Login-Page']);
     }
 }

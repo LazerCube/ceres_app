@@ -8,7 +8,7 @@ import { UsersComponent } from '../';
     selector: 'user-profile',
     directives: [RouterLink, UsersComponent, UserProfile],
     providers: [UserService],
-    templateUrl: 'user-profile.component.html',
+    templateUrl: 'app/+users/user-profile/user-profile.component.html',
 })
 
 export class UserProfile implements OnInit {
