@@ -88,6 +88,9 @@ gulp.task('watch', function () {
     gulp.watch('bootstrap/**/*.scss', ['scss']).on('change', function (e) {
         console.log('SASS file ' + e.path + ' has been changed. Compiling.');
     });
+    gulp.watch('src/lib/manifest.json', ['resources']).on('change', function (e) {
+        console.log('manifest file ' + e.path + ' has been changed. Updating.');
+    });
 });
 
 /**

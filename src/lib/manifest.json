@@ -1,0 +1,26 @@
+{
+    "name": "CeresApp",
+    "short_name": "Ceres",
+    "description": "App for the Ceres API, currently work in progress.",
+    "icons": [
+        {
+            "src": "/lib/images/icons/low_res.png",
+            "sizes": "72x72",
+            "type": "image/png"
+        },
+        {
+            "src": "/lib/images/icons/mid_res.png",
+            "sizes": "128x128",
+            "type": "image/png"
+        },
+        {
+            "src": "/lib/images/icons/high_res.png",
+            "sizes": "256x256",
+            "type": "image/png"
+        }
+    ],
+    "start_url": "/",
+    "background_color": "#f0f0f0",
+    "display": "standalone",
+    "orientation": "portrait"
+}
