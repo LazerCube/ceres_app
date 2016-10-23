@@ -6,7 +6,7 @@ import { UsersComponent } from '../';
 
 @Component({
     selector: 'user-profile',
-    directives: [RouterLink, UsersComponent, UserProfile],
+    directives: [RouterLink, UserProfile],
     providers: [UserService],
     templateUrl: 'app/+users/user-profile/user-profile.component.html',
 })

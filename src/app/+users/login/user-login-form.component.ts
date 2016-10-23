@@ -40,7 +40,7 @@ export class LoginForm {
                      () => {
                          console.log("Authorizated");
                          this._eventsService.showNavigation.emit(true);
-                         this._router.parent.navigate(['Home-Page']);
+                         this._router.parent.navigate(['User-Profile']);
                      }
                 );
             event.preventDefault();

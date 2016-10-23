@@ -29,7 +29,7 @@ export class LoggedInRouterOutlet extends RouterOutlet {
         if (!this.publicRoutes[url] && !authenticated()) {
             this.parentRouter.navigate(['Login-Page']);
         } else if (this.publicRoutes[url] && authenticated()) {
-            this.parentRouter.navigate(['Home-Page']);
+            this.parentRouter.navigate(['User-Profile']);
         }
         return super.activate(instruction);
     }
