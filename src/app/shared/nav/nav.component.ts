@@ -8,7 +8,7 @@ import { EventsService } from '../../shared';
     directives: [ROUTER_DIRECTIVES],
     templateUrl: '/app/shared/nav/nav.component.html',
 })
-export class Navbar {
+export class NavbarComponent {
     public title = 'Ceres app';
 
     private _visible: boolean = true;

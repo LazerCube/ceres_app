@@ -2,7 +2,14 @@
 <div class="container-fluid">
     <div class="row">
         <sidebar></sidebar>
-        <div class="{{ class }}">
+        <div class="{{ _class }}">
+            <div class="row">
+                <alert dismissible="true" type="danger">
+                    <p>
+                        Test, Test, Test, Test, Test
+                    </p>
+                </alert>
+            </div>
             <router-outlet></router-outlet>
         </div>
     </div>

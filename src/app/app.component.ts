@@ -19,9 +19,10 @@ import {
     ValidationService,
     ControlMessagesComponent,
     LoggedInRouterOutlet,
+    NavbarComponent,
+    SidebarComponent,
+    AlertComponent,
     authenticated,
-    Navbar,
-    Sidebar,
 } from './shared';
 
 // enableProdMode();
@@ -29,7 +30,12 @@ import {
 @Component({
   selector: 'app',
   templateUrl: 'app/app.component.html',
-  directives: [Sidebar, Navbar, LoggedInRouterOutlet],
+  directives: [
+      SidebarComponent,
+      NavbarComponent,
+      AlertComponent,
+      LoggedInRouterOutlet
+  ],
 })
 
 // @RouteConfig([
@@ -73,14 +79,14 @@ import {
 ])
 
 export class App implements OnInit {
-    private class: string = "";
+    private _class: string = "";
 
     constructor(private authService:AuthService, private eventsService: EventsService) {
         this.eventsService.showNavigation.subscribe((mode: boolean) => {
             if (mode) {
-                this.class = "col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main";
+                this._class = "col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main";
             } else {
-                this.class = "main";
+                this._class = "main";
             }
         });
     }
@@ -103,9 +109,9 @@ bootstrap(App, [
               headerName: 'Authorization',
               headerPrefix: 'Bearer',
               clientId: 'AAABBBCCC',
-              tokenUrl: 'http://192.168.2.48:8000/auth/token/',
+              tokenUrl: 'http://localhost:8000/auth/token/',
               tokenName: 'id_token',
-              userInfoUrl: 'http://192.168.2.48:8000/me/',
+              userInfoUrl: 'http://localhost:8000/me/',
               tokenGetter: (localStorage.getItem(this.tokenName)),
               //globalHeaders: [{'Content-Type':'application/json'}],
               noJwtError: true

@@ -19,7 +19,7 @@ import {
 })
 export class RegistrationForm {
     private _user: UserModel;
-    private res: any;
+    private _res: any;
     public registrationForm: any;
 
     constructor(
@@ -47,8 +47,14 @@ export class RegistrationForm {
             this._userService
                 .save(this.registrationForm.value)
                 .subscribe(
-                    data => this.res = data
+                    data => this._res = data
+                    err => console.log(err.text()),
+                    () => {
+                        console.log("Registered");
+                        this._router.parent.navigate(['Login-Page']);
+                    }
                 );
+
         }
     }
 }

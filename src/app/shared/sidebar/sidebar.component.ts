@@ -8,7 +8,7 @@ import { EventsService } from '../../shared';
     directives: [ROUTER_DIRECTIVES],
     templateUrl: '/app/shared/sidebar/sidebar.component.html',
 })
-export class Sidebar {
+export class SidebarComponent {
     private _visible: boolean = true;
     constructor(private _router: Router, private _eventsService: EventsService) {
         this._eventsService.showNavigation.subscribe((mode: boolean) => {
