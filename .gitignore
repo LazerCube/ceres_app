@@ -21,3 +21,5 @@ _temp
 *.css.map
 node_modules
 css/*
+
+.DS_Store
