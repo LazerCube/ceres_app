@@ -72,7 +72,7 @@ gulp.task('scss', () => {
         .pipe(sass().on('error', sass.logError))
         // .pipe(sass({outputStyle: 'compressed'})
         .pipe(sourcemaps.write())
-        .pipe(gulp.dest('src/css'));
+        .pipe(gulp.dest('build/css'));
 });
 
 /**
