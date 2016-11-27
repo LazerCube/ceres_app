@@ -9,6 +9,6 @@ export * from './derp.pipe';
 
 export * from './nav';
 export * from './sidebar';
-export * from './alert';
+export * from './alerts';
 
 // export * from './footer';

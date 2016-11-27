@@ -38,7 +38,8 @@
         'shared',
         'shared/nav',
         'shared/sidebar',
-        'shared/alert',
+        'shared/alerts',
+        'shared/alerts/alert',
     ];
 
     // add package entries for angular packages in the form '@angular/common': { main: 'index.js', defaultExtension: 'js' }

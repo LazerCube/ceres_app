@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 
 @Component({
     selector: 'alert',
-    templateUrl: '/app/shared/alert/alert.component.html',
+    templateUrl: '/app/shared/alerts/alert/alert.component.html',
 })
 
 export class AlertComponent implements OnInit {
@@ -14,8 +14,6 @@ export class AlertComponent implements OnInit {
 
     public closed: boolean;
     protected classes:Array<string> = [];
-
-    constructor() {}
 
     public ngOnInit():any {
         this.classes[0] = `alert-${this.type}`;
@@ -30,7 +28,6 @@ export class AlertComponent implements OnInit {
         }
     }
 
-    // todo: mouse event + touch + pointer
     public onClose():void {
         this.closed = true;
         this.close.emit(this);

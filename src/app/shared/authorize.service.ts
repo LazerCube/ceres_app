@@ -95,6 +95,17 @@ export class AuthService {
         });
     }
 
+    public errorHandler (error: any) {
+        let errMsg = (error.message) ? error.message :
+        error.status ? `${error.status} - ${error.statusText}` : 'Server error';
+        console.error(errMsg); // log to console instead
+        // if (res.status === 401) {
+        //     console.log('Unauthorized request. Trying to register the session and then retry the request.');
+        //     // handler for get new auth token
+        // }
+        return Observable.throw(errMsg);
+    }
+
     private request(url: string | Request, options?: RequestOptionsArgs) : Observable<Response> {
         if (typeof url === 'string') {
             return this.get(url, options); // Recursion: transform url from String to Request
@@ -102,7 +113,16 @@ export class AuthService {
         // from this point url is always an instance of Request;
         let req: Request = <Request>url;
         req.headers.set(this._config.headerName, this._config.headerPrefix + this._config.tokenGetter());
-        return this.http.request(req);
+
+        let observable = this.http
+            .request(req)
+            //.retry(2)
+            .catch(res => {
+                return this.errorHandler(res);
+            });
+
+        return observable;
+        //return this.http.request(req);
     }
 
     private mergeOptions(defaultOpts: RequestOptions, providedOpts: RequestOptionsArgs) {
@@ -151,6 +171,20 @@ export class AuthService {
         myHeaders.append('Content-Type', 'application/x-www-form-urlencoded');
         let body = "grant_type=password" + "&username=" + username + "&password=" + password + "&client_id=" + this._config.clientId;
         return this.requestHelper({ url:  this._config.tokenUrl, body: body, method: RequestMethod.Post }, { headers: myHeaders });
+    }
+
+    public extractData(res: Response) {
+        let body = res.json();
+
+        if (body) {
+            if (body.results) {
+                return body.results;
+            } else {
+                return body;
+            }
+        } else {
+            return [];
+        }
     }
 
     // private logError(err) {

@@ -35,13 +35,10 @@ export class LoginForm {
                 .subscribe(
                      data => {
                          localStorage.setItem("id_token", data.json().access_token);
-                     },
-                     err => console.log(err.text()),
-                     () => {
                          console.log("Authorizated");
                          this._eventsService.showNavigation.emit(true);
                          this._router.parent.navigate(['User-Profile']);
-                     }
+                     },
                 );
             event.preventDefault();
         }

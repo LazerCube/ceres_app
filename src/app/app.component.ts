@@ -21,7 +21,7 @@ import {
     LoggedInRouterOutlet,
     NavbarComponent,
     SidebarComponent,
-    AlertComponent,
+    AlertsComponent,
     authenticated,
 } from './shared';
 
@@ -33,9 +33,10 @@ import {
   directives: [
       SidebarComponent,
       NavbarComponent,
-      AlertComponent,
+      AlertsComponent,
       LoggedInRouterOutlet
   ],
+  providers: [AlertsComponent]
 })
 
 // @RouteConfig([
@@ -81,7 +82,7 @@ import {
 export class App implements OnInit {
     private _class: string = "";
 
-    constructor(private authService:AuthService, private eventsService: EventsService) {
+    constructor(private authService:AuthService, private eventsService: EventsService, private alertsComponent: AlertsComponent) {
         this.eventsService.showNavigation.subscribe((mode: boolean) => {
             if (mode) {
                 this._class = "col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main";
@@ -93,6 +94,7 @@ export class App implements OnInit {
 
     ngOnInit() {
         this.eventsService.showNavigation.emit(authenticated());
+
     }
 }
 
