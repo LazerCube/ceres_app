@@ -7,6 +7,10 @@ const sourcemaps = require('gulp-sourcemaps');
 const tsProject = tsc.createProject("tsconfig.json");
 const tslint = require('gulp-tslint');
 
+const sass = require('gulp-sass');
+const watch = require('gulp-watch');
+
+
 /**
  * Remove build directory.
  */
@@ -60,6 +64,18 @@ gulp.task("libs", () => {
 });
 
 /**
+ * Compiles SASS files.
+ */
+gulp.task('scss', () => {
+    return gulp.src('bootstrap/scss/bootstrap.scss')
+        .pipe(sourcemaps.init())
+        .pipe(sass().on('error', sass.logError))
+        // .pipe(sass({outputStyle: 'compressed'})
+        .pipe(sourcemaps.write())
+        .pipe(gulp.dest('build/css'));
+});
+
+/**
  * Watch for changes in TypeScript, HTML and CSS files.
  */
 gulp.task('watch', function () {
@@ -69,11 +85,17 @@ gulp.task('watch', function () {
     gulp.watch(["src/**/*.html", "src/**/*.css"], ['resources']).on('change', function (e) {
         console.log('Resource file ' + e.path + ' has been changed. Updating.');
     });
+    gulp.watch('bootstrap/**/*.scss', ['scss']).on('change', function (e) {
+        console.log('SASS file ' + e.path + ' has been changed. Compiling.');
+    });
+    gulp.watch('src/lib/manifest.json', ['resources']).on('change', function (e) {
+        console.log('manifest file ' + e.path + ' has been changed. Updating.');
+    });
 });
 
 /**
  * Build the project.
  */
-gulp.task("build", ['compile', 'resources', 'libs'], () => {
+gulp.task("build", ['compile', 'scss', 'resources', 'libs'], () => {
     console.log("Building the project ...");
 });

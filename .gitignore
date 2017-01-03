@@ -16,3 +16,10 @@ _temp
 !systemjs.config.js
 !typings/typings.d.ts
 !wallaby.js
+
+.sass-cache
+*.css.map
+node_modules
+css/*
+
+.DS_Store

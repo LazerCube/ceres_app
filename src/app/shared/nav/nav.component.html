@@ -1,0 +1,19 @@
+<!-- Navbar -->
+<nav class="navbar navbar-dark bg-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <button class="navbar-toggler hidden-sm-up" type="button" data-toggle="collapse" data-target="#navbar-header" aria-controls="navbar-header">
+          ☰
+        </button>
+        <div class="collapse navbar-toggleable-xs" id="navbar-header">
+            <a class="navbar-brand" [routerLink]="['User-Profile']" >{{ title }}</a>
+            <div *ngIf="_visible">
+                <ul class="nav navbar-nav pull-xs-right">
+                    <li class="nav-item">
+                        <a class="nav-link" (click)="doLogout()">Sign Out</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</nav>
+<!-- Sidebar -->
