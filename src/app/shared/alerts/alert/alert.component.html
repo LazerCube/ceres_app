@@ -1,9 +1,0 @@
-<div class="row">
-    <div class="alert" [ngClass]="classes" role="alert" *ngIf="!closed">
-        <button *ngIf="dismissible" type="button" class="close" (click)="onClose()" (touch)="onClose()">
-            <span aria-hidden="true">&times;</span>
-            <span class="sr-only">Close</span>
-        </button>
-        <ng-content></ng-content>
-    </div>
-</div>
