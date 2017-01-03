@@ -30,7 +30,6 @@ export class LoginForm {
 
     doLogin(event) {
         if (this.loginForm.dirty && this.loginForm.valid) {
-            console.log(this.loginForm.value);
             this._authService.login(this.loginForm.value.username, this.loginForm.value.password)
                 .subscribe(
                      data => {

@@ -1,8 +1,12 @@
-import {Http, Headers, Request, RequestOptions, RequestOptionsArgs, RequestMethod, Response} from '@angular/http';
+import { Http, Headers, Request, RequestOptions, RequestOptionsArgs, RequestMethod, Response } from '@angular/http';
 import { Injectable, provide } from "@angular/core";
 import { Observable } from 'rxjs/Observable';
 
 import { Router } from '@angular/router-deprecated';
+
+import { AlertsComponent } from './alerts/alerts.component';
+
+// Change name from authoize.service to api.service
 
 declare var escape: any;
 
@@ -76,12 +80,18 @@ export class AuthService {
     private _config: IAuthConfig;
     public tokenStream: Observable<string>;
 
-    constructor(options: AuthConfig, private http: Http, private _defOpts?: RequestOptions) {
-    this._config = options.getConfig();
+    constructor(
+        private options: AuthConfig,
+        private http: Http,
+        private alertsComponent: AlertsComponent,
+        private _defOpts?: RequestOptions) {
 
-    this.tokenStream = new Observable<string>((obs: any) => {
-        obs.next(this._config.tokenGetter());
-        });
+        this._config = options.getConfig();
+        //this.alertsComponent.createAlert("Connection Error!", {timeout: 10000, type: "danger"});
+
+        this.tokenStream = new Observable<string>((obs: any) => {
+            obs.next(this._config.tokenGetter());
+            });
     }
 
     private setGlobalHeaders(headers: Array<Object>, request: Request | RequestOptionsArgs) {
@@ -97,12 +107,15 @@ export class AuthService {
 
     public errorHandler (error: any) {
         let errMsg = (error.message) ? error.message :
-        error.status ? `${error.status} - ${error.statusText}` : 'Server error';
-        console.error(errMsg); // log to console instead
-        // if (res.status === 401) {
-        //     console.log('Unauthorized request. Trying to register the session and then retry the request.');
-        //     // handler for get new auth token
-        // }
+        error.status ? `${error.status} - ${error.statusText}` : "Server error";
+        if (error.status === 401) {
+            console.log("Unauthorized request. Trying to register the session and then retry then requst.");
+            // get new token(refresh)
+        }
+        if (error.status === 200) {
+            console.log("Connection Error.");
+            //this.alertsComponent.createAlert("Connection Error!", {timeout: 10000, type: "danger"});
+        }
         return Observable.throw(errMsg);
     }
 
@@ -122,7 +135,6 @@ export class AuthService {
             });
 
         return observable;
-        //return this.http.request(req);
     }
 
     private mergeOptions(defaultOpts: RequestOptions, providedOpts: RequestOptionsArgs) {

@@ -35,8 +35,7 @@ import {
       NavbarComponent,
       AlertsComponent,
       LoggedInRouterOutlet
-  ],
-  providers: [AlertsComponent]
+  ]
 })
 
 // @RouteConfig([
@@ -82,7 +81,10 @@ import {
 export class App implements OnInit {
     private _class: string = "";
 
-    constructor(private authService:AuthService, private eventsService: EventsService, private alertsComponent: AlertsComponent) {
+    constructor(
+        private authService:AuthService,
+        private eventsService: EventsService,
+        private alertsComponent: AlertsComponent) {
         this.eventsService.showNavigation.subscribe((mode: boolean) => {
             if (mode) {
                 this._class = "col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main";
@@ -94,7 +96,6 @@ export class App implements OnInit {
 
     ngOnInit() {
         this.eventsService.showNavigation.emit(authenticated());
-
     }
 }
 
@@ -104,6 +105,7 @@ bootstrap(App, [
     EventsService,
     UserService,
     ValidationService,
+    AlertsComponent,
     provide(PLATFORM_DIRECTIVES, {useValue: (ControlMessagesComponent), multi: true}),
     provide(AuthService, {
         useFactory: (http) => {
@@ -116,7 +118,6 @@ bootstrap(App, [
               userInfoUrl: 'http://localhost:8000/me/',
               tokenGetter: (localStorage.getItem(this.tokenName)),
               //globalHeaders: [{'Content-Type':'application/json'}],
-              noJwtError: true
           }), http);
         },
         deps: [Http]

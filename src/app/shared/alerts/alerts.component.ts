@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Injectable } from '@angular/core';
 
 import { AlertComponent } from './alert';
 import { IAlertParams } from './alerts.interface';
@@ -9,6 +9,7 @@ import { IAlertParams } from './alerts.interface';
     templateUrl: '/app/shared/alerts/alerts.component.html',
 })
 
+@Injectable()
 export class AlertsComponent {
     private DEFAULT_TYPE = 'warning';
 
@@ -29,7 +30,6 @@ export class AlertsComponent {
     // createAlert("Oh snap!",{timeout:5000, type:"success"})
     public createAlert(text: string, params?: IAlertParams):void {
         let alert = {msg: text};
-        console.log(params);
         if (params) {
             if (params.type) {
                 alert.type = params.type;
@@ -43,7 +43,12 @@ export class AlertsComponent {
                 alert.timeout = params.timeout;
             }
         }
+        console.log(alert);
         this.alerts.push(alert);
+    }
+
+    public logAlerts():void {
+        console.log(this.alerts);
     }
 
 }
